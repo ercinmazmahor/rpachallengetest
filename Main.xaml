@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="708,1012.8" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="708,1052.8" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="22">
       <x:String>System.Activities</x:String>
@@ -61,6 +61,7 @@
       <Variable x:TypeArguments="x:String" Name="factuurlaatstebetaaldag" />
       <Variable x:TypeArguments="x:Boolean" Name="itemcompleted" />
       <Variable x:TypeArguments="sd:DataTable" Name="ConfigDataTable" />
+      <Variable x:TypeArguments="ui:GenericValue" Name="ercin" />
     </Flowchart.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -85,34 +86,10 @@
       </sap:WorkflowViewStateService.ViewState>
       <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke getdatainfo workflow" sap:VirtualizedContainerService.HintSize="200,52.8" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="getdatainfo.xaml">
         <ui:InvokeWorkflowFile.Arguments>
-          <OutArgument x:TypeArguments="sd:DataTable" x:Key="FacuurDataTable">
-            <mva:VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="FactuurDataTable">
-              <mva:VisualBasicReference.Result>
-                <OutArgument x:TypeArguments="Location(sd:DataTable)" />
-              </mva:VisualBasicReference.Result>
-            </mva:VisualBasicReference>
-          </OutArgument>
-          <OutArgument x:TypeArguments="x:Int32" x:Key="CountError">
-            <mva:VisualBasicReference x:TypeArguments="x:Int32" ExpressionText="CountError">
-              <mva:VisualBasicReference.Result>
-                <OutArgument x:TypeArguments="Location(x:Int32)" />
-              </mva:VisualBasicReference.Result>
-            </mva:VisualBasicReference>
-          </OutArgument>
-          <OutArgument x:TypeArguments="x:String" x:Key="ErrorText">
-            <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="ErrorText">
-              <mva:VisualBasicReference.Result>
-                <OutArgument x:TypeArguments="Location(x:String)" />
-              </mva:VisualBasicReference.Result>
-            </mva:VisualBasicReference>
-          </OutArgument>
-          <OutArgument x:TypeArguments="sd:DataTable" x:Key="ConfigDataTable">
-            <mva:VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="ConfigDataTable">
-              <mva:VisualBasicReference.Result>
-                <OutArgument x:TypeArguments="Location(sd:DataTable)" />
-              </mva:VisualBasicReference.Result>
-            </mva:VisualBasicReference>
-          </OutArgument>
+          <OutArgument x:TypeArguments="sd:DataTable" x:Key="FacuurDataTable">[FactuurDataTable]</OutArgument>
+          <OutArgument x:TypeArguments="x:Int32" x:Key="CountError">[CountError]</OutArgument>
+          <OutArgument x:TypeArguments="x:String" x:Key="ErrorText">[ErrorText]</OutArgument>
+          <OutArgument x:TypeArguments="sd:DataTable" x:Key="ConfigDataTable">[ConfigDataTable]</OutArgument>
         </ui:InvokeWorkflowFile.Arguments>
       </ui:InvokeWorkflowFile>
       <FlowStep.Next>
@@ -177,76 +154,16 @@
                       </sap:WorkflowViewStateService.ViewState>
                       <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Processtotemplate workflow" sap:VirtualizedContainerService.HintSize="333.6,88" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="Processtotemplate.xaml">
                         <ui:InvokeWorkflowFile.Arguments>
-                          <InOutArgument x:TypeArguments="x:Int32" x:Key="CountError">
-                            <mva:VisualBasicReference x:TypeArguments="x:Int32" ExpressionText="CountError">
-                              <mva:VisualBasicReference.Result>
-                                <OutArgument x:TypeArguments="Location(x:Int32)" />
-                              </mva:VisualBasicReference.Result>
-                            </mva:VisualBasicReference>
-                          </InOutArgument>
-                          <InOutArgument x:TypeArguments="x:String" x:Key="ErrorText">
-                            <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="ErrorText">
-                              <mva:VisualBasicReference.Result>
-                                <OutArgument x:TypeArguments="Location(x:String)" />
-                              </mva:VisualBasicReference.Result>
-                            </mva:VisualBasicReference>
-                          </InOutArgument>
-                          <InArgument x:TypeArguments="x:String" x:Key="factuurnummer">
-                            <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="factuurnummer">
-                              <mva:VisualBasicValue.Result>
-                                <OutArgument x:TypeArguments="x:String" />
-                              </mva:VisualBasicValue.Result>
-                            </mva:VisualBasicValue>
-                          </InArgument>
-                          <InArgument x:TypeArguments="x:String" x:Key="factuurklantnaam">
-                            <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="factuurklantnaam">
-                              <mva:VisualBasicValue.Result>
-                                <OutArgument x:TypeArguments="x:String" />
-                              </mva:VisualBasicValue.Result>
-                            </mva:VisualBasicValue>
-                          </InArgument>
-                          <InArgument x:TypeArguments="x:String" x:Key="factuurprijs">
-                            <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="factuurprijs">
-                              <mva:VisualBasicValue.Result>
-                                <OutArgument x:TypeArguments="x:String" />
-                              </mva:VisualBasicValue.Result>
-                            </mva:VisualBasicValue>
-                          </InArgument>
-                          <InArgument x:TypeArguments="x:String" x:Key="factuuradres">
-                            <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="factuuradres">
-                              <mva:VisualBasicValue.Result>
-                                <OutArgument x:TypeArguments="x:String" />
-                              </mva:VisualBasicValue.Result>
-                            </mva:VisualBasicValue>
-                          </InArgument>
-                          <InArgument x:TypeArguments="x:String" x:Key="factuurmail">
-                            <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="factuurmail">
-                              <mva:VisualBasicValue.Result>
-                                <OutArgument x:TypeArguments="x:String" />
-                              </mva:VisualBasicValue.Result>
-                            </mva:VisualBasicValue>
-                          </InArgument>
-                          <InArgument x:TypeArguments="x:String" x:Key="factuuromschrijving">
-                            <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="factuuromschrijving">
-                              <mva:VisualBasicValue.Result>
-                                <OutArgument x:TypeArguments="x:String" />
-                              </mva:VisualBasicValue.Result>
-                            </mva:VisualBasicValue>
-                          </InArgument>
-                          <InArgument x:TypeArguments="x:String" x:Key="factuurlaatstebetaaldag">
-                            <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="factuurlaatstebetaaldag">
-                              <mva:VisualBasicValue.Result>
-                                <OutArgument x:TypeArguments="x:String" />
-                              </mva:VisualBasicValue.Result>
-                            </mva:VisualBasicValue>
-                          </InArgument>
-                          <InArgument x:TypeArguments="sd:DataTable" x:Key="configDataTable">
-                            <mva:VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="ConfigDataTable">
-                              <mva:VisualBasicValue.Result>
-                                <OutArgument x:TypeArguments="sd:DataTable" />
-                              </mva:VisualBasicValue.Result>
-                            </mva:VisualBasicValue>
-                          </InArgument>
+                          <InOutArgument x:TypeArguments="x:Int32" x:Key="CountError">[CountError]</InOutArgument>
+                          <InOutArgument x:TypeArguments="x:String" x:Key="ErrorText">[ErrorText]</InOutArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="factuurnummer">[factuurnummer]</InArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="factuurklantnaam">[factuurklantnaam]</InArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="factuurprijs">[factuurprijs]</InArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="factuuradres">[factuuradres]</InArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="factuurmail">[factuurmail]</InArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="factuuromschrijving">[factuuromschrijving]</InArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="factuurlaatstebetaaldag">[factuurlaatstebetaaldag]</InArgument>
+                          <InArgument x:TypeArguments="sd:DataTable" x:Key="configDataTable">[ConfigDataTable]</InArgument>
                         </ui:InvokeWorkflowFile.Arguments>
                       </ui:InvokeWorkflowFile>
                       <FlowStep.Next>
@@ -286,5 +203,26 @@
     <x:Reference>__ReferenceID1</x:Reference>
     <x:Reference>__ReferenceID3</x:Reference>
     <x:Reference>__ReferenceID4</x:Reference>
+    <FlowStep>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <av:Point x:Key="ShapeLocation">8.89499999999998,20</av:Point>
+          <av:Size x:Key="ShapeSize">262.4,60</av:Size>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <Assign sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+        <Assign.To>
+          <OutArgument x:TypeArguments="ui:GenericValue">[ercin]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="ui:GenericValue">["gey"]</InArgument>
+        </Assign.Value>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </Assign>
+    </FlowStep>
   </Flowchart>
 </Activity>
